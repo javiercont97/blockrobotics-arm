@@ -16,6 +16,7 @@
 		pkg="robot_state_publisher"
 		type="robot_state_publisher"
 	/>
+	
 	<node
 		name="rviz"
 		pkg="rviz"

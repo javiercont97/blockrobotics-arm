@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="block-robotics">
+	<xacro:macro name="defaultInertial" params="mass">
+		<inertial>
+			<mass value="${mass}"/>
+			<inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+		</inertial>
+	</xacro:macro>
+
+	<xacro:macro name="defaultTransmission" params="number">
+		<transmission name="transmission_${number}">
+			<type>
+				transmission_interface/SimpleTransmission
+			</type>
+			<joint name="joint_${number}">
+				<hardwareInterface>
+					hardware_interface/PositionJointInterface
+				</hardwareInterface>
+			</joint>
+			<actuator name="motor_${number}">
+				<hardwareInterface>
+					hardware_interface/PositionJointInterface
+				</hardwareInterface>
+				<mechanicalReduction>
+					1
+				</mechanicalReduction>
+			</actuator>
+		</transmission>
+	</xacro:macro>
+
 	<link name="world" />
 
 	<link name="base_link">
@@ -10,6 +38,13 @@
 				<mesh filename="package://robotic_arm_model/mesh/base_link.stl" scale="0.01 0.01 0.01"/>
 			</geometry>
 		</visual>
+		<collision>
+			<origin rpy="${pi/2} 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://robotic_arm_model/mesh/base_link.stl" scale="0.01 0.01 0.01"/>
+			</geometry>
+		</collision>
+		<xacro:defaultInertial mass="1.0"/>
 	</link>
 
 	<joint name="virtual_joint" type="fixed">
@@ -19,12 +54,19 @@
 	</joint>
 
 	<link name="link_1">
+		<xacro:defaultInertial mass="0.25"/>
 		<visual>
 			<origin rpy="${pi/2} 0 0" xyz="0 0 0.5"/>
 			<geometry>
 				<mesh filename="package://robotic_arm_model/mesh/link_1.stl" scale="0.01 0.01 0.01"/>
 			</geometry>
 		</visual>
+		<collision>
+			<origin rpy="${pi/2} 0 0" xyz="0 0 0.5"/>
+			<geometry>
+				<mesh filename="package://robotic_arm_model/mesh/link_1.stl" scale="0.01 0.01 0.01"/>
+			</geometry>
+		</collision>
 	</link>
 
 	<joint name="joint_1" type="revolute">
@@ -36,12 +78,19 @@
 	</joint>
 
 	<link name="link_2">
+		<xacro:defaultInertial mass="0.3"/>
 		<visual>
 			<origin rpy="${pi/2} 0 0" xyz="0 -0.21078 -0.28624"/>
 			<geometry>
 				<mesh filename="package://robotic_arm_model/mesh/link_2.stl" scale="0.01 0.01 0.01"/>
 			</geometry>
 		</visual>
+		<collision>
+			<origin rpy="${pi/2} 0 0" xyz="0 -0.21078 -0.28624"/>
+			<geometry>
+				<mesh filename="package://robotic_arm_model/mesh/link_2.stl" scale="0.01 0.01 0.01"/>
+			</geometry>
+		</collision>
 	</link>
 
 	<joint name="joint_2" type="revolute">
@@ -53,12 +102,19 @@
 	</joint>
 
 	<link name="link_3">
+		<xacro:defaultInertial mass="0.3"/>
 		<visual>
 			<origin rpy="${pi/2} 0 0" xyz="0.03556 0 0"/>
 			<geometry>
 				<mesh filename="package://robotic_arm_model/mesh/link_3.stl" scale="0.01 0.01 0.01"/>
 			</geometry>
 		</visual>
+		<collision>
+			<origin rpy="${pi/2} 0 0" xyz="0.03556 0 0"/>
+			<geometry>
+				<mesh filename="package://robotic_arm_model/mesh/link_3.stl" scale="0.01 0.01 0.01"/>
+			</geometry>
+		</collision>
 	</link>
 
 	<joint name="joint_3" type="revolute">
@@ -70,12 +126,19 @@
 	</joint>
 
 	<link name="link_4">
+		<xacro:defaultInertial mass="0.25"/>
 		<visual>
 			<origin rpy="0 0 0" xyz="-0.2225 -0.35266 0.057835"/>
 			<geometry>
 				<mesh filename="package://robotic_arm_model/mesh/link_4.stl" scale="0.01 0.01 0.01"/>
 			</geometry>
 		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="-0.2225 -0.35266 0.057835"/>
+			<geometry>
+				<mesh filename="package://robotic_arm_model/mesh/link_4.stl" scale="0.01 0.01 0.01"/>
+			</geometry>
+		</collision>
 	</link>
 
 	<joint name="joint_4" type="revolute">
@@ -87,12 +150,19 @@
 	</joint>
 	
 	<link name="link_5">
+		<xacro:defaultInertial mass="0.2"/>
 		<visual>
 			<origin rpy="0 ${pi} 0" xyz="0.0885 -0.32762 -0.5529"/>
 			<geometry>
 				<mesh filename="package://robotic_arm_model/mesh/link_5.stl" scale="0.01 0.01 0.01"/>
 			</geometry>
 		</visual>
+		<collision>
+			<origin rpy="0 ${pi} 0" xyz="0.0885 -0.32762 -0.5529"/>
+			<geometry>
+				<mesh filename="package://robotic_arm_model/mesh/link_5.stl" scale="0.01 0.01 0.01"/>
+			</geometry>
+		</collision>
 	</link>
 
 	<joint name="joint_5" type="revolute">
@@ -104,12 +174,19 @@
 	</joint>
 
 	<link name="end_effector_flange">
+		<xacro:defaultInertial mass="0.01"/>
 		<visual>
 			<origin rpy="${pi/2} 0 0" xyz="0 0 -0.1644"/>
 			<geometry>
 				<mesh filename="package://robotic_arm_model/mesh/link_6.stl" scale="0.01 0.01 0.01"/>
 			</geometry>
 		</visual>
+		<collision>
+			<origin rpy="${pi/2} 0 0" xyz="0 0 -0.1644"/>
+			<geometry>
+				<mesh filename="package://robotic_arm_model/mesh/link_6.stl" scale="0.01 0.01 0.01"/>
+			</geometry>
+		</collision>
 	</link>
 
 	<joint name="joint_6" type="revolute">
@@ -121,4 +198,18 @@
 		<limit lower="-${pi/2}" upper="${pi/2}" effort="30" velocity="10" />
 	</joint>
 
+	<xacro:defaultTransmission number="1"/>
+	<xacro:defaultTransmission number="2"/>
+	<xacro:defaultTransmission number="3"/>
+	<xacro:defaultTransmission number="4"/>
+	<xacro:defaultTransmission number="5"/>
+	<xacro:defaultTransmission number="6"/>
+
+	<gazebo>
+		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">s
+			<robotNamespace>/mecabot</robotNamespace>
+			<robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+			<legacyModeNS>true</legacyModeNS>
+		</plugin>
+	</gazebo>
 </robot>
