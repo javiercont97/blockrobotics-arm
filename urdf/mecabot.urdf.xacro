@@ -56,13 +56,13 @@
 	<link name="link_1">
 		<xacro:defaultInertial mass="0.25"/>
 		<visual>
-			<origin rpy="${pi/2} 0 0" xyz="0 0 0.5"/>
+			<origin rpy="${pi/2} 0 0" xyz="0 0 0"/>
 			<geometry>
 				<mesh filename="package://robotic_arm_model/mesh/link_1.stl" scale="0.01 0.01 0.01"/>
 			</geometry>
 		</visual>
 		<collision>
-			<origin rpy="${pi/2} 0 0" xyz="0 0 0.5"/>
+			<origin rpy="${pi/2} 0 0" xyz="0 0 0"/>
 			<geometry>
 				<mesh filename="package://robotic_arm_model/mesh/link_1.stl" scale="0.01 0.01 0.01"/>
 			</geometry>
@@ -72,7 +72,7 @@
 	<joint name="joint_1" type="revolute">
 		<parent link="base_link" />
 		<child link="link_1" />
-		<origin rpy="0 0 0" xyz="0 0 0" />
+		<origin rpy="0 0 0" xyz="0 0 0.5" />
 		<axis xyz="0 0 1"/>
 		<limit lower="-${pi/2}" upper="${pi/2}" effort="30" velocity="10" />
 	</joint>
@@ -96,7 +96,7 @@
 	<joint name="joint_2" type="revolute">
 		<parent link="link_1" />
 		<child link="link_2" />
-		<origin rpy="0 0 0" xyz="0 0 0.95" />
+		<origin rpy="0 0 0" xyz="0 0 0.45" />
 		<axis xyz="1 0 0"/>
 		<limit lower="-${pi/2}" upper="${pi/2}" effort="30" velocity="10" />
 	</joint>
